@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Will You Marry Me?</title>
+    <style>
+        body {
+            background: #000;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .container {
+            text-align: center;
+            color: #ff69b4;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            animation: float 6s linear infinite;
+            opacity: 0;
+        }
+
+        .message {
+            font-size: 1.5em;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #ff69b4;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #ff1493;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="container">
+        <h1>My Dearest Sarah 💖</h1>
+        <div class="message">
+            <p>From the moment our eyes met, my world changed forever...</p>
+            <p>Your smile lights up my days, your laughter is my favorite melody,</p>
+            <p>And your love has become my greatest treasure.</p>
+            <p>I want to wake up next to you every morning,</p>
+            <p>Grow old with you, and share every beautiful moment life offers.</p>
+            <p>Will you make me the happiest person alive by being mine forever?</p>
+        </div>
+        <button onclick="propose()">My Forever Love</button>
+    </div>
+
+    <audio id="myAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        function propose() {
+            // Start music
+            document.getElementById('myAudio').play();
+            
+            // Create hearts continuously
+            setInterval(createHeart, 300);
+            
+            // Change the button to "Yes!"
+            const btn = document.querySelector('button');
+            btn.innerHTML = "YES! 💍";
+            btn.onclick = () => {
+                document.querySelector('.message').innerHTML = 
+                `<h2>I can't wait to spend forever with you! 💖</h2>
+                 <p>You've made me the happiest person in the world!</p>`;
+                btn.style.display = 'none';
+            }
+            
+            // Add fireworks effect
+            document.body.style.background = 'linear-gradient(45deg, #ff69b4, #9400d3)';
+        }
+    </script>
+</body>
+</html>
